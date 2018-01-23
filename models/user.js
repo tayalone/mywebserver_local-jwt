@@ -31,6 +31,14 @@ userSchema.pre('save', function (next) {
     next()
 })
 
+userSchema.methods.comparePassword = function (oldPassword){
+    const user = this
+    const hash = user.password
+    const res = bcrypt.compareSync(oldPassword, hash)
+    return res
+}
+
+
 const User = mongoose.model('user',userSchema)
 
 //export User เพื่อให้fileอื่นเรียกใช้ได้

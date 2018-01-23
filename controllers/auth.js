@@ -37,5 +37,10 @@ exports.signup = (req, res, next) => {
         })
 
     })
-    
+}
+
+exports.signin = (req, res, next) => {
+    //controller รับ user มา จาก passport.local
+    //res.send(req.user)
+    res.status(200).send({success : true, token :  tokenForUser(req.user)})
 }
