@@ -1,24 +1,14 @@
 const testGetPost = require('./controllers/testGetPost')
+const testMoogoose = require('./controllers/testMongoose')
 
 module.exports = (app) => {
+    // test Controller
+    app.get('/get', testGetPost.getuser)
+    app.get('/get/:id',testGetPost.getuserId)
+    app.post('/post', testGetPost.postuser)
+
+    //test Use Mongoose
+    app.post('/createuser', testMoogoose.testCreateUser)
     
-    app.get('/getuser', testGetPost.getuser)
-    app.get('/getuser/:id',testGetPost.getuserId)
-    app.post('/postuser', testGetPost.postuser)
-    
-    // app.get('/getuser', (req, res) => {
-    //     res.json({
-    //         email: "a@a.com",
-    //         role: "user"
-    //     })
-    // })
-    // app.get('/getuser/:id',(req, res) => {
-    //     //console.log(req.params.id)
-    //     res.json(req.params)
-    // })
-    // app.post('/postuser', (req, res) => {
-    //     //console.log(req.body)
-    //     res.json(req.body)
-    // })
 
 }
