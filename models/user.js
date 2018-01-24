@@ -16,11 +16,14 @@ const userSchema = new Schema ({
     salt: {
         type: "string",
         default: "asdasdsakdfsfaskdfasf"
-    }
+    },
 })
 
 userSchema.pre('save', function (next) {
     let user = this
+    if (!user.password){
+        return next()
+    }
      bcrypt.genSalt(100 , function(err, salt) {
         if (err) { return next(err) }
         bcrypt.hash(user.password, salt, null, function(err, hash) {

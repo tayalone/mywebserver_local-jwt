@@ -11,11 +11,9 @@ const jwtOption = {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: config.jwtSecret
 }
-
 // สร้าง JWTStrategy 
-
 const jwtLogin = new JwtStrategy (jwtOption, (payload, done) => {
-    console.log(payload)
+    //console.log(payload)
     User.findById(payload.id, (err, user) => {
         if (err) {return done(err,false) }
 
@@ -52,7 +50,9 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 })
 
 
+
+
 //  ทำให้ passport รู้จัก jwt
 passport.use(jwtLogin)
-
+//  ทำให้ passport รู้จัก local
 passport.use(localLogin)
